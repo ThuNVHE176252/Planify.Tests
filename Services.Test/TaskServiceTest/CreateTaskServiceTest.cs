@@ -11,6 +11,7 @@ using TaskModel = Planify_BackEnd.Models.Task;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
 using Planify_BackEnd.Hub;
+using Planify_BackEnd.Services.Notification;
 
 namespace Planify.Tests.Services.Test.TaskServiceTest
 {
@@ -19,7 +20,9 @@ namespace Planify.Tests.Services.Test.TaskServiceTest
     {
         private Mock<ITaskRepository> _taskRepositoryMock;
         private Mock<IHttpContextAccessor> _httpContextAccessorMock;
+        private Mock<IEmailSender> _emailSenderMock;
         private Mock<IHubContext<NotificationHub>> _hubContextMock;
+        private Mock<IUserRepository> _userRepositoryMock;
         private TaskService _taskService;
         private Guid _organizerId;
 
@@ -29,11 +32,15 @@ namespace Planify.Tests.Services.Test.TaskServiceTest
             _taskRepositoryMock = new Mock<ITaskRepository>();
             _httpContextAccessorMock = new Mock<IHttpContextAccessor>();
             _hubContextMock = new Mock<IHubContext<NotificationHub>>();
+            _emailSenderMock = new Mock<IEmailSender>();
+            _userRepositoryMock = new Mock<IUserRepository>();
 
             _taskService = new TaskService(
                 _taskRepositoryMock.Object,
                 _httpContextAccessorMock.Object,
-                _hubContextMock.Object
+                _hubContextMock.Object,
+                _emailSenderMock.Object,
+                _userRepositoryMock.Object
             );
             _organizerId = Guid.NewGuid();
         }
