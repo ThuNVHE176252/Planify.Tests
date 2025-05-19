@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\fpt\9\CapstoneProject\BE_SEP490_G35_SPR25\Planify_BackEnd.csproj" />
     <ProjectReference Include="..\BE_SEP490_G35_SPR25\Planify_BackEnd.csproj" />
   </ItemGroup>
 
